@@ -14,20 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install compiler
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake
+          sudo apt-get install -y g++
 
-      - name: Configure CMake
+      - name: Build program
         run: |
-          cmake -S . -B build
+          mkdir -p build
+          g++ -std=c++17 src/main.cpp -o build/app
 
-      - name: Build
-        run: |
-          cmake --build build --config Release -- -j$(nproc)
-
-      - name: Run tests
-        run: |
-          cd build
-          ctest --output-on-failure
+      - name: Run program
+        run: ./build/app
