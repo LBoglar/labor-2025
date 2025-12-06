@@ -22,7 +22,7 @@ jobs:
       - name: Build program
         run: |
           mkdir -p build
-          g++ -std=c++17 src/main.cpp -o build/app
+          g++ -std=c++17 src/*.cpp -o build/app
 
       - name: Run program
         run: ./build/app
